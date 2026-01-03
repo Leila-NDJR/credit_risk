@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Système de Credit Scoring Intelligent - AfriCash Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            margin-bottom: 30px;
+            text-align: center;
+            border: 3px solid rgba(30, 60, 114, 0.3);
+        }
+
+        h1 {
+            color: #1e3c72;
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.3em;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        .duration {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            display: inline-block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+            border-left: 5px solid #1e3c72;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            border-left-width: 8px;
+        }
+
+        .stat-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .stat-number {
+            font-size: 2.2em;
+            font-weight: bold;
+            color: #1e3c72;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .section {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .section h2 {
+            color: #1e3c72;
+            margin-bottom: 25px;
+            font-size: 2em;
+            border-left: 5px solid #1e3c72;
+            padding-left: 20px;
+        }
+
+        .problem-box {
+            background: linear-gradient(135deg, #fff5f5, #ffe0e0);
+            border-left: 5px solid #dc3545;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .solution-box {
+            background: linear-gradient(135deg, #f0fff4, #d4edda);
+            border-left: 5px solid #28a745;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .architecture {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+
+        .tech-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .tech-table th {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .tech-table td {
+            padding: 15px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .tech-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 50px;
+            margin-top: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #1e3c72, #f5576c);
+        }
+
+        .timeline-phase {
+            margin-bottom: 40px;
+        }
+
+        .phase-header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .phase-header:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .phase-header::before {
+            content: '';
+            position: absolute;
+            left: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            border: 4px solid #1e3c72;
+            box-shadow: 0 0 0 4px rgba(30, 60, 114, 0.2);
+        }
+
+        .phase-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .phase-duration {
+            opacity: 0.9;
+            font-size: 0.95em;
+        }
+
+        .timeline-steps {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-left: 20px;
+        }
+
+        .step-item {
+            padding: 15px;
+            margin: 10px 0;
+            background: white;
+            border-radius: 8px;
+            border-left: 3px solid #1e3c72;
+            transition: all 0.3s;
+        }
+
+        .step-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #1e3c72;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .deliverable {
+            background: #e7f3ff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 0.9em;
+            border-left: 3px solid #0066cc;
+        }
+
+        .folder-tree {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 25px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .folder-tree .folder { color: #4ec9b0; }
+        .folder-tree .file { color: #9cdcfe; }
+        .folder-tree .comment { color: #6a9955; }
+
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .objective-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+        }
+
+        .objective-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .objective-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .objective-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .metrics-box {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .success-criteria {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .criteria-box {
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid;
+        }
+
+        .technical-criteria {
+            background: #e8f4fd;
+            border-color: #0066cc;
+        }
+
+        .business-criteria {
+            background: #fff4e8;
+            border-color: #ff9800;
+        }
+
+        .criteria-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .criteria-list {
+            list-style: none;
+        }
+
+        .criteria-list li {
+            padding: 10px;
+            margin: 8px 0;
+            background: white;
+            border-radius: 5px;
+            border-left: 3px solid #0066cc;
+        }
+
+        .business-criteria .criteria-list li {
+            border-left-color: #ff9800;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 50px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn {
+            display: inline-block;
+            background: white;
+            color: #1e3c72;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            background: #f5576c;
+            color: white;
+        }
+
+        .comparison-table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th {
+            background: #1e3c72;
+            color: white;
+            padding: 15px;
+        }
+
+        .comparison-table td {
+            padding: 12px;
+            border: 1px solid #dee2e6;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @media (max-width: 768px) {
+            .success-criteria {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💳 Système de Credit Scoring Intelligent</h1>
+            <p class="subtitle">Projet Data Analytics End-to-End - AfriCash Solutions</p>
+            <p style="color: #666; margin-top: 10px;">Master 1 Data Science & Modélisation Statistique</p>
+            <div class="duration">⏱️ Durée estimée : 45 jours (Sept - Oct 2025)</div>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">💰</div>
+                <div class="stat-number">22% → 8%</div>
+                <div class="stat-label">Réduction du taux de défaut visé</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-number">500K+</div>
+                <div class="stat-label">Micro-crédits financés depuis 2020</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💸</div>
+                <div class="stat-number">450M FCFA</div>
+                <div class="stat-label">Pertes annuelles à éviter</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🌍</div>
+                <div class="stat-number">5 pays</div>
+                <div class="stat-label">Afrique de l'Ouest couverts</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <div class="stat-number">2.5M</div>
+                <div class="stat-label">Clients du secteur informel</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🏢 1. Contexte Entreprise</h2>
+            <h3 style="color: #1e3c72; margin: 20px 0;">AfriCash Solutions - L'histoire</h3>
+            <p style="font-size: 1.1em; line-height: 1.8;">
+                <strong>AfriCash Solutions</strong> est une start-up Fintech basée à <strong>Abidjan</strong> et opérant dans 5 pays d'Afrique de l'Ouest. Elle propose des <strong>micro-crédits instantanés via mobile money</strong> aux entrepreneurs du secteur informel (commerçants, agriculteurs, artisans) qui n'ont pas accès aux banques traditionnelles.
+            </p>
+            <p style="margin-top: 15px; font-size: 1.05em;">
+                Depuis son lancement en 2020, AfriCash a financé plus de <strong>500 000 micro-projets</strong>. Cependant, l'entreprise fait face à une crise de croissance liée à son système d'évaluation obsolète.
+            </p>
+
+            <div class="problem-box">
+                <h4 style="color: #dc3545; font-size: 1.3em; margin-bottom: 15px;">⚠️ Le Problème Business</h4>
+                <p style="margin-bottom: 10px;">Le processus actuel d'octroi de crédit repose sur des <strong>règles manuelles rigides</strong>. Conséquences :</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>📈 <strong>Taux de défaut élevé (NPL) : 22%</strong> des emprunteurs ne remboursent pas (moyenne secteur &lt;10%)</li>
+                    <li>💔 <strong>Pertes financières :</strong> Plus de 450 millions FCFA par an</li>
+                    <li>🚫 <strong>Exclusion injuste :</strong> Clients solvables rejetés faute d'historique bancaire</li>
+                    <li>⏰ <strong>Décisions lentes :</strong> Délai moyen de 48h pour une approbation</li>
+                </ul>
+            </div>
+
+            <div class="solution-box">
+                <h4 style="color: #28a745; font-size: 1.3em; margin-bottom: 15px;">✅ Votre Mission</h4>
+                <p style="font-size: 1.1em; font-weight: 500;">
+                    Développer un <strong>système intelligent de credit scoring</strong> qui analyse les données en temps réel pour prédire la probabilité de défaut de paiement, réduire le taux de défaut de <span class="highlight">22% à moins de 8%</span>, et augmenter le volume de crédits accordés aux bons profils.
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎯 2. Objectifs du Projet</h2>
+            <div class="objectives-grid">
+                <div class="objective-card">
+                    <div class="objective-icon">🔍</div>
+                    <div class="objective-title">Analyse de Risque</div>
+                    <p>Identifier les caractéristiques socio-économiques influençant le remboursement</p>
+                    <div class="metrics-box">
+                        <strong>Dataset :</strong> 32,581 demandes<br>
+                        <strong>Variables :</strong> 12 colonnes
+                    </div>
+                </div>
+                <div class="objective-card">
+                    <div class="objective-icon">🤖</div>
+                    <div class="objective-title">Modélisation ML</div>
+                    <p>Construire un modèle prédictif "Solvable" vs "Risqué"</p>
+                    <div class="metrics-box">
+                        <strong>Target :</strong> AUC-ROC &gt; 0.90<br>
+                        <strong>Recall :</strong> &gt; 80% (défauts)
+                    </div>
+                </div>
+                <div class="objective-card">
+                    <div class="objective-icon">⚡</div>
+                    <div class="objective-title">API REST</div>
+                    <p>Service de prédictions temps réel et batch</p>
+                    <div class="metrics-box">
+                        <strong>Latence :</strong> &lt; 200ms<br>
+                        <strong>Endpoints :</strong> /predict, /predict_batch
+                    </div>
+                </div>
+                <div class="objective-card">
+                    <div class="objective-icon">📊</div>
+                    <div class="objective-title">Monitoring</div>
+                    <p>Dashboard de suivi et détection de dérive</p>
+                    <div class="metrics-box">
+                        <strong>Métriques :</strong> Performance temps réel<br>
+                        <strong>Alertes :</strong> Data drift automatique
+                    </div>
+                </div>
+                <div class="objective-card">
+                    <div class="objective-icon">🔄</div>
+                    <div class="objective-title">MQTT Messaging</div>
+                    <p>Traitement batch asynchrone des prédictions</p>
+                    <div class="metrics-box">
+                        <strong>Broker :</strong> Mosquitto<br>
+                        <strong>Topics :</strong> credit/requests
+                    </div>
+                </div>
+                <div class="objective-card">
+                    <div class="objective-icon">💡</div>
+                    <div class="objective-title">Explicabilité</div>
+                    <p>Interpréter les décisions avec SHAP</p>
+                    <div class="metrics-box">
+                        <strong>XAI :</strong> Raisons de refus<br>
+                        <strong>Conformité :</strong> Régulations financières
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📂 3. Dataset</h2>
+            <p style="font-size: 1.1em; margin-bottom: 20px;">
+                <strong>Source :</strong> Credit Risk Dataset (Kaggle)<br>
+                <strong>Lien :</strong> <a href="https://www.kaggle.com/datasets/laotse/credit-risk-dataset" target="_blank" style="color: #1e3c72;">https://www.kaggle.com/datasets/laotse/credit-risk-dataset</a>
+            </p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Variable</th>
+                        <th>Description</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>loan_status</strong></td>
+                        <td>🎯 <strong>Variable cible</strong> (0 = Remboursé, 1 = Défaut)</td>
+                        <td>Binaire</td>
+                    </tr>
+                    <tr>
+                        <td>person_age</td>
+                        <td>Âge du demandeur</td>
+                        <td>Numérique</td>
+                    </tr>
+                    <tr>
+                        <td>person_income</td>
+                        <td>Revenu annuel en FCFA</td>
+                        <td>Numérique</td>
+                    </tr>
+                    <tr>
+                        <td>person_home_ownership</td>
+                        <td>Statut logement (Propriétaire/Locataire/Autre)</td>
+                        <td>Catégorielle</td>
+                    </tr>
+                    <tr>
+                        <td>loan_intent</td>
+                        <td>Motif du prêt (Éducation, Santé, Business, Personnel...)</td>
+                        <td>Catégorielle</td>
+                    </tr>
+                    <tr>
+                        <td>loan_grade</td>
+                        <td>Note de crédit actuelle (A-G)</td>
+                        <td>Ordinale</td>
+                    </tr>
+                    <tr>
+                        <td>loan_amnt</td>
+                        <td>Montant du prêt demandé</td>
+                        <td>Numérique</td>
+                    </tr>
+                    <tr>
+                        <td>loan_int_rate</td>
+                        <td>Taux d'intérêt (%)</td>
+                        <td>Numérique</td>
+                    </tr>
+                    <tr>
+                        <td>cb_person_default_on_file</td>
+                        <td>Historique de défaut (Y/N)</td>
+                        <td>Binaire</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>🛠️ 4. Stack Technique</h2>
+            
+            <h3 style="color: #1e3c72; margin: 25px 0 15px 0;">4.1 Architecture Globale</h3>
+            <div class="architecture">
+Data Source (CSV) → EDA (Jupyter) → ML Pipeline (Scikit/XGBoost)
+                                                    ↓
+                            API (FastAPI) ← → MQTT (Mosquitto)
+                                    ↓                    ↓
+                            Predictions DB          Batch Processing
+                                    ↓
+                        Dashboard (Streamlit) + Monitoring
+            </div>
+
+            <h3 style="color: #1e3c72; margin: 25px 0 15px 0;">4.2 Technologies et Justifications</h3>
+            <table class="tech-table">
+                <thead>
+                    <tr>
+                        <th>Technologie</th>
+                        <th>Rôle dans le projet</th>
+                        <th>Justification</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Python + Pandas</strong></td>
+                        <td>Manipulation données, EDA</td>
+                        <td>Standard industrie finance</td>
+                    </tr>
+                    <tr>
+                        <td><strong>XGBoost / LightGBM</strong></td>
+                        <td>Modélisation classification</td>
+                        <td>Meilleure performance sur données tabulaires</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Scikit-Learn</strong></td>
+                        <td>Preprocessing, pipeline, métriques</td>
+                        <td>Écosystème ML mature et stable</td>
+                    </tr>
+                    <tr>
+                        <td><strong>FastAPI</strong></td>
+                        <td>API REST scoring temps réel</td>
+                        <td>Performance élevée, doc automatique</td>
+                    </tr>
+                    <tr>
+                        <td><strong>MQTT (Mosquitto)</strong></td>
+                        <td>Messaging pour prédictions batch</td>
+                        <td>Communication IoT légère et asynchrone</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SHAP</strong></td>
+                        <td>Explicabilité des décisions</td>
+                        <td>Obligation réglementaire en finance</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Streamlit</strong></td>
+                        <td>Dashboard monitoring</td>
+                        <td>Interface web rapide (Python pur)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SQLite</strong></td>
+                        <td>Stockage prédictions et métriques</td>
+                        <td>Base de données locale simple</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Git</strong></td>
+                        <td>Versioning du code</td>
+                        <td>Suivi modifications, collaboration</td>
+                    </tr>
+                    <tr>
+                        <td><strong>MLflow (Optionnel)</strong></td>
+                        <td>Tracking expériences ML</td>
+                        <td>Gestion versions modèles</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>📁 5. Structure du Projet</h2>
+            <div class="folder-tree">
+<span class="folder">credit-scoring-system/</span>
+│
+├── <span class="folder">data/</span>
+│   ├── <span class="folder">raw/</span>                     <span class="comment"># Fichier CSV original de Kaggle</span>
+│   ├── <span class="folder">processed/</span>               <span class="comment"># Données nettoyées et encodées</span>
+│   ├── <span class="folder">predictions/</span>             <span class="comment"># Résultats des prédictions</span>
+│   └── <span class="folder">models/</span>                  <span class="comment"># Modèles entraînés (.pkl)</span>
+│
+├── <span class="folder">notebooks/</span>
+│   ├── <span class="file">01_eda.ipynb</span>               <span class="comment"># Analyse exploratoire</span>
+│   ├── <span class="file">02_preprocessing.ipynb</span>     <span class="comment"># Nettoyage, imputation, encoding</span>
+│   ├── <span class="file">03_modeling.ipynb</span>          <span class="comment"># Entraînement et tuning</span>
+│   └── <span class="file">04_interpretation.ipynb</span>    <span class="comment"># Analyse SHAP, feature importance</span>
+│
+├── <span class="folder">src/</span>
+│   ├── <span class="folder">data_processing/</span>         <span class="comment"># Scripts traitement données</span>
+│   │   ├── <span class="file">cleaner.py</span>
+│   │   └── <span class="file">feature_engineering.py</span>
+│   ├── <span class="folder">models/</span>                  
